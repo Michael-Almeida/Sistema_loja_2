@@ -3,7 +3,9 @@
     <img :src="img" alt="">
     <h3>{{title}}</h3>
     <p>Preço: R$ {{price}}</p>
-    <button><router-link to="/produto-detalhe" >Pedido</router-link></button>
+    <button><router-link :to="{ name: '/produto-detalhe', params: { title: String, price: String, img: img, id: _id } }">Pedido</router-link></button>
+  
+
   </div>
 </template>
 <script>
@@ -12,9 +14,33 @@ export default {
   props : {
     title: String,
     price: String,
-    img : String
+    img : String,
+    id : String
+  },
+  methods: {
+    getProdutoDetalhe: async function() {
+      const result = await fetch(
+        "http://localhost:3000/produtos/" + this.$routes.params.id
+      )
+        .then(res => res.json())
+        .catch(error => {
+          return {
+            error: true,
+            message: error
+          };
+        });
+
+      if (!result.error) {
+        this.produtoDetalhe = result;
+      }
+    },
+    created: function(){
+      this.ProdutoDetalhe();
+    }
   }
 }
+
+
 </script>
 <style>
   .card {
