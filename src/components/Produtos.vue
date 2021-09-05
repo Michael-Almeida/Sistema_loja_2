@@ -26,9 +26,6 @@ export default {
   components: {
     Card
   },
-  props: {
-    isButton: Boolean
-  },
   data: function() {
     return {
       search: "",

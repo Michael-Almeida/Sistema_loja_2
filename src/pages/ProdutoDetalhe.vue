@@ -1,14 +1,17 @@
 <template>
   <div class="produto-detalhe">
-    <Header/>
-    <main>    
-      <Detalhe/>
+    <Header />
+    <main>
+      <Detalhe
+        :title="produtoDetalhe.title"
+        :price="produtoDetalhe.price"
+        :img="produtoDetalhe.img"
+        :id="produtoDetalhe.id"
+      />
+      
     </main>
-    <Footer/>
+    <Footer />
   </div>
-
-    
-
 </template>
 <script>
 import Header from "../components/Header.vue";
@@ -22,6 +25,11 @@ export default {
     Header,
     Detalhe,
     Footer
+  },
+  data: function(){
+    return {
+      produtoDetalhe: {}
+    }
   },
 
   methods: {
@@ -42,10 +50,9 @@ export default {
       }
     },
     created: function(){
-      this.ProdutoDetalhe();
+      this.getProdutoDetalhe();
     }
   }
 };
 </script>
-<style>
-</style>
+<style></style>

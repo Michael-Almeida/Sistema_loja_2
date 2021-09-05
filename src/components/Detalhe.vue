@@ -7,8 +7,8 @@
           <img src="../assets/red-read.jpg" alt="Red dead" />
         </div>
         <div class="col-md-9">
-          <h2>Red Dead Redemption II</h2>
-          <p>R$ 100,00</p>
+          <h2>{{title}}</h2>
+          <p>R$ {{price}}</p>
         </div>
         <div class="col-md-3">
           <div class="detalhe__box-price">
@@ -40,9 +40,16 @@
     </div>
   </section>
 </template>
+
 <script>
 export default {
   name : "Detalhe",
+  props: {
+    title: String,
+    price: String,
+    img: String,
+    id: String
+  },
   data: function(){
     return{
       quantity : 1,
