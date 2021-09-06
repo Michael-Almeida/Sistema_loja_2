@@ -11,7 +11,7 @@
       </div>
       <div class="row">
         <div v-for="prod in productsFiltered" :key="prod.id" class="col-md-4">
-          <Card :title="prod.title" :price="prod.price" :img="prod.img"/>
+          <Card :title="prod.title" :price="prod.price" :img="prod.img" :_id="prod._id"/>
         </div>
       </div>
     </div>
