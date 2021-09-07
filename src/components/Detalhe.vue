@@ -4,64 +4,84 @@
       <div class="row">
         <div class="col-md-12">
           <h2>Detalhe do Produto</h2>
-          <img :src="produtoDetalhe.img" alt="Red dead">
+          <img :src="produtoDetalhe.img" alt="" />
         </div>
         <div class="col-md-9">
-          <h2>{{produtoDetalhe.title}}</h2>
-          <p>R$ {{produtoDetalhe.price}}</p>
+          <h2>{{ produtoDetalhe.title }}</h2>
+          <p>R$ {{ produtoDetalhe.price }}</p>
         </div>
         <div class="col-md-3">
           <div class="detalhe__box-price">
             <p>Quantidade</p>
-            <input @input="toCalculate" type="number" v-model="quantity">
+            <input @input="toCalculate" type="number" v-model="quantity" />
           </div>
         </div>
         <div class="col-md-12">
-          <hr>
+          <hr />
           <h3>Descrição:</h3>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. Lorem Ipsum is simply dummy text of
+            the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown
+            printer took a galley of type and scrambled it to make a type
+            specimen book. It has survived not only five centuries, but also the
+            leap into electronic typesetting, remaining essentially unchanged
           </p>
-          <h4>Total : {{finalQuantity}} * {{produtoDetalhe.price}} = {{total.toString().replace('.', ',')}}</h4>
+          <h4>
+            Total : {{ finalQuantity }} * {{ produtoDetalhe.price }} =
+            {{ total.toString().replace(".", ",") }}
+          </h4>
         </div>
         <div class="col-md-12">
-          <button>Fazer Pedido</button>
+          <button @click="clientes">Fazer Pedido</button>
+        </div>
+        <div class="row">
+          <div v-if="dadosCliente" class="col-md-12 consulta_cpf">
+            <hr />
+            <Clientes
+              :produtoId="this.id"
+              :valorUnitario="this.price"
+              :quantidade="this.quantity"
+              :valorTotal="this.total"
+            />
+          </div>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-
-
 <script>
+import Clientes from "../components/Clientes.vue";
 export default {
   name: "Detalhe",
-  props: {
-    title: String,
-    price: String,
-    img: String,
-    _id: String
+  components: {
+    Clientes,
   },
   data: function() {
     return {
+      Detalhe: "",
       quantity: 1,
       finalQuantity: 1,
-      preco: 100,
+      preco: "",
       total: 0,
-      produtoDetalhe: {}
+      dadosCliente: false,
+      produtoDetalhe: {},
     };
   },
   methods: {
+    clientes: function() {
+      if (!this.dadosCliente) {
+        this.dadosCliente = true;
+      } else {
+        this.dadosCliente = false;
+      }
+    },
     toCalculate: function() {
       this.finalQuantity = this.quantity;
 
@@ -76,25 +96,26 @@ export default {
       const result = await fetch(
         "http://localhost:3000/produtos/" + this.$route.params.id
       )
-        .then(res => res.json())
-        .catch(error => {
+        .then((res) => res.json())
+        .catch((error) => {
           return {
             error: true,
-            message: error
+            message: error,
           };
         });
 
       if (!result.error) {
         this.produtoDetalhe = result;
-        this.preco = parseFloat(result.price)
+        this.preco = parseFloat(result.price);
       }
-    }
+    },
   },
   created: function() {
     this.getProdutoDetalhe();
-  }
+  },
 };
 </script>
+
 <style>
 .detalhe {
   padding: 50px 0px;
