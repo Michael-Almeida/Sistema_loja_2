@@ -52,7 +52,7 @@ export default {
   methods: {
     getCLienteCpf: async function() {
       const result = await fetch(
-        "http://localhost:3000/clientes/busca" + this.cpfInput
+        "http://localhost:3000/clientes/busca" + this.$route.params.cpfInput
       )
         .then((res) => res.json())
         .catch((error) => {
