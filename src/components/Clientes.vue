@@ -1,5 +1,5 @@
 <template>
-  <section class="clientes">
+  <section class="Clientes">
     <div class="container">
       <h3>Pedido</h3>
       <div class="col-md-12">
@@ -13,7 +13,7 @@
         />
         <button class="btn-search" @click="getClienteCpf">Buscar</button>
       </div>
-      <div class="col-md-12" v-if="clientes">
+      <div class="col-md-12" v-if="Clientes">
         <p>Nome: {{ this.none }} {{ this.sobrenome }}</p>
         <p>CPF: {{ this.CPF }}</p>
         <p>Data de Nascimento: {{ this.dataDeNascimento }}</p>
@@ -22,7 +22,7 @@
           Armazenar Pedido
         </button>
       </div>
-      <p v-if="messagem">{{ this.aviso }}</p>
+      <p v-if="message">{{ this.aviso }}</p>
     </div>
   </section>
 </template>
@@ -44,13 +44,13 @@ export default {
       sobrenome: "",
       cpf: "",
       dataDeNascimento: "",
-      Cliente: false,
-      mensagem: false,
+      Clientes: false,
+      message: false,
       aviso: "",
     };
   },
   methods: {
-    getCLienteCpf: async function() {
+    getClienteCpf: async function() {
       const result = await fetch(
         "http://localhost:3000/clientes/busca" + this.$route.params.cpfInput
       )
@@ -106,7 +106,7 @@ export default {
         });
       this.Cliente = false;
       if (result.insertedId) {
-        this.mensagem = true;
+        this.message = true;
         this.aviso = "Pedido cadastrado com sucesso.";
       }
     },
