@@ -45,7 +45,7 @@
             <hr />
             <Clientes
               :produtoId="this.id"
-              :valorUnitario = "this.price"
+              :valorUnitario="this.preco"
               :quantidade="this.quantity"
               :valorTotal="this.total"
             />
