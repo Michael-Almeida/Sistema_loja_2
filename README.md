@@ -12,7 +12,7 @@
 
 <h2>🖼️ Resultado</h2>
 <img src='https://github.com/Michael-Almeida/Sistema_loja_2/blob/master/tela/home.png' />
-<img  width='70%' src='https://github.com/Michael-Almeida/Sistema_loja_2/blob/master/tela/produto.png' />
+<img  width='60%' src='https://github.com/Michael-Almeida/Sistema_loja_2/blob/master/tela/produto.png' />
 
 # sistema-loja
 
